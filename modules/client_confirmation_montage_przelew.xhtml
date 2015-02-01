@@ -1,0 +1,206 @@
+<p><font size="2">Witamy!</font></p>
+
+<p><font size="2">Dziękujemy za złożenie zamówienia w sklepie internetowym Feu Vert. Otrzymaliśmy je i przyjmujemy do realizacji. Poniżej znajdują się szczegółowe
+    informacje.</font></p>
+
+<p><font size="2">W ciągu 2 dni roboczych skontaktujemy się z Państwem w celu umówienia dokładnej daty montażu.</font>
+</p>
+
+<p><font size="2"><b>W celu realizacji zamówienia okaż w serwisie wydrukowane potwierdzenie lub mail w urządzeniu mobilnym (telefon lub tablet).</b></font></p>
+
+<p><font size="2"><b>Data złożenia zamówienia:</b> ${order/created_at}</font></p>
+
+<table width="100%">
+<tr><td>
+    <table cellspacing="0" border="0" cellpadding="0" align="left" width="550" style="margin:0 0 20px 0;border-collapse:collapse; clear: both;">
+        <tr>
+            <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background-color: #EBEBEB; text-align: left;" colspan="5">
+                <p><font size="2"><b>Dane zamówienia</b></font></p>
+            </td>
+        </tr>
+        <tr>
+            <th style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:left;"><font size="2">Produkt</font></th>
+            <th style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;"><font size="2">Kod</font></th>
+            <th style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;"><font size="2">Cena za szt.</font></th>
+            <th style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;"><font size="2">Ilość</font></th>
+            <th style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;"><font size="2">Wartość</font></th>
+        </tr>
+
+        <tr tal:repeat="product products">
+            <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:left;">
+                <font size="2">${product/name}</font>
+            </td>
+            <td tal:condition="php: department['type'] == 'Auto Centrum Feu Vert'" style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;"><font size="2">${product/ref_fv}</font></td>
+            <td tal:condition="php: department['type'] != 'Auto Centrum Feu Vert'" style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;"><font size="2">${product/ref_fvcs}</font></td>
+            <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;"><font size="2">${php: number_format(product['price'], 2, ',', '')} zł</font></td>
+            <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;"><font size="2">${product/amount}</font>
+            </td>
+            <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;">
+                <font size="2">${php: number_format(product['price_sum'], 2, ',', '')} zł</font>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;background:#F8F8F8;"><font
+                    size="2"><strong>Wartość zamówienia:</strong></font></td>
+            <td colspan="4"
+                style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;text-align:center;background:#F8F8F8;"><font
+                    size="2"><strong>${php: number_format(order['order_sum'], 2, ',', '')} zł</strong></font></td>
+        </tr>
+    </table>
+
+</td></tr>
+<tr><td>
+
+    <!-- MIEJSCE ODBIORU I MONTAZU -->
+    <table cellspacing="0" border="0" cellpadding="0" style="border-collapse:collapse; margin-top: 15px; clear: both;" width="550">
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background-color: #EBEBEB; text-align: left;" colspan="2">
+            <p><font size="2"><b>Miejsce odbioru (i montażu)</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Oddział</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;"><font size="2">
+            ${department/type}<br/><strong>${department/name}</strong></font>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Ulica</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+            <font size="2" style="white-space:nowrap">${department/street}</font>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Telefon</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+            <font size="2">${structure department/phone}</font>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">E-mail</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+            <font size="2"><a href="mailto:${department/mail}">${department/mail}</a></font>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;" rowspan="3">
+            <font size="2">Godziny otwarcia</font>
+        </td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Pon.-Pt.</font>
+            <font size="2">${department/openings/week}</font>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Sobota</font>
+            <font size="2">${department/openings/sob}</font>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Niedziela</font>
+            <font size="2">${php: !empty(department['openings']['ndz']) ? department['openings']['ndz'] : ''}</font>
+        </td>
+    </tr>
+    </table>
+
+</td></tr>
+<tr><td>
+
+    <!-- DANE UŻYTKOWNIKA -->
+    <table cellspacing="0" border="0" cellpadding="0" style="border-collapse:collapse; margin-top: 15px; clear: both;" width="550">
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background-color: #EBEBEB; text-align: left;" colspan="2">
+            <p><font size="2"><b>Twoje dane</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Imię i nazwisko</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+            <font size="2">${client/name}</font>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Adres</font></td>
+
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+
+            <font size="2">
+                ${order/street} ${order/number}<br />${order/post_code} ${order/city}</font>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Telefon</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+            <font size="2">${client/phone}</font>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">E-mail</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+            <font size="2"><a href="mailto:${client/mail}">${client/mail}</a></font>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Nr rej. samochodu</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+            <font size="2">${order/car_number}</font>
+        </td>
+    </tr>
+    </table>
+
+
+
+</td></tr>
+<tr><td>
+
+    <!-- DANE DO FAKTURY -->
+    <table cellspacing="0" border="0" cellpadding="0" style="border-collapse:collapse; margin-top: 15px; clear: both;" width="550" tal:condition="php: order['customer_type'] == 1">
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background-color: #EBEBEB; text-align: left;" colspan="2">
+            <p><font size="2"><b>Dane do faktury</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Firma</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+            <font size="2">${order/company_name}</font>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">NIP</font></td>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+            <font size="2">${order/nip}</font>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;"><font size="2">Adres</font></td>
+
+        <td style="padding:5px 5px 5px 5px;border:1px solid #CCCCCC;background:#FFFFFF;">
+
+            <font size="2">
+                ${order/company_street} ${order/company_number}<br />${order/company_post_code} ${order/company_number}
+            </font>
+        </td>
+    </tr>
+    </table>
+
+
+</td></tr>
+<tr><td>
+<p><font size="2">W razie pytań lub wątpliwości prosimy o kontakt.</font></p>
+<p><font size="2">Pozdrawiamy,<br />
+<a href="http://www.feuvert.pl">www.feuvert.pl</a></font></p>
+    </td></tr></table>
+<br />
+<div tal:condition="php: department['type'] == 'Auto Centrum Feu Vert'"><font size="2">FEU VERT POLSKA Sp. z o.o. z siedzibą w Warszawie (adres siedziby i adres do korespondencji: ul. Puławska 303, 02-785 Warszawa); wpisana do Rejestru Przedsiębiorców Krajowego Rejestru Sądowego pod numerem KRS 0000009985; sąd rejestrowy, w którym przechowywana jest dokumentacja spółki: Sąd Rejonowy dla M. St. Warszawy w Warszawie, XIII Wydział Gospodarczy Krajowego Rejestru Sądowego; kapitał zakładowy w wysokości: 47 302 250,00 zł.; NIP: 9511876703; REGON 013225542; adres poczty elektronicznej: esklep@feuvert.pl.</font></div>
+<div tal:condition="php: department['type'] != 'Auto Centrum Feu Vert'"><font size="2">FEU VERT CAR SERVICE POLSKA Sp. z o.o. z siedzibą w Warszawie (adres siedziby i adres do korespondencji: ul. Puławska 303, 02-785 Warszawa); wpisana do Rejestru Przedsiębiorców Krajowego Rejestru Sądowego pod numerem KRS 0000057178; sąd rejestrowy, w którym przechowywana jest dokumentacja spółki: Sąd Rejonowy dla M. St. Warszawy w Warszawie, XIII Wydział Gospodarczy Krajowego Rejestru Sądowego; kapitał zakładowy w wysokości: 70 712 800,00 zł.; NIP: 5222502934; REGON 191914714; adres poczty elektronicznej: esklep@feuvert.pl.</font></div>
+<a href="http://www.feuvert.pl/regulamin.html">Regulamin sklepu</a>

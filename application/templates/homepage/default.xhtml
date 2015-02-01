@@ -1,0 +1,95 @@
+<tal:block metal:use-macro="layout/layout.xhtml/layout" tal:define="title 'title of the page'">
+<tal:block metal:fill-slot="content">
+<div class="content">
+    <div id="map"></div>
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP06C6LRM4_btz9OOauvi592vlZUBU_k8">
+</script>
+<script type="text/javascript" src="/assets/scripts/map_styles.js"></script>
+<script type="text/javascript">
+    function initialize() {
+
+        var markers = [
+            <tal:block tal:repeat="station php: Dao_Station::select()">[${station/lat}, ${station/lng}, '${php: '4,' . rand(0,9) . rand(0,9)}']${php: !repeat.station.end ? ', ' : ''}</tal:block>
+        ];
+
+        var mapOptions = {
+            zoom: 15,
+            disableDefaultUI: true,
+            scrollWheel: false,
+            draggable: false,
+            zoomControl: false,
+            scaleControl: false,
+            disableDoubleClickZoom: true,
+            styles: mapStyles
+        };
+        var map = new google.maps.Map(document.getElementById('map'),
+                mapOptions);
+
+        var pos;
+
+        function doOnOrientationChange()
+        {
+            google.maps.event.trigger(map, "resize");
+
+            //alert(pos);
+            map.setCenter(pos);
+        }
+
+        window.addEventListener('orientationchange', doOnOrientationChange);
+
+        // Try HTML5 geolocation
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                pos = new google.maps.LatLng(position.coords.latitude,
+                        position.coords.longitude);
+
+                var iconBase = 'http://tankuje.com/assets/';
+				
+				var icon = {
+					url: iconBase + 'car.svg',
+                    scaledSize: new google.maps.Size(64,64),
+                    anchor: new google.maps.Point(32, 32)
+				};
+				
+                var marker = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                    icon: icon
+                });
+
+                for (var i in markers)
+                {
+                    icon = {
+                        url: iconBase + 'marker?value=' + markers[i][2]
+                        //scaledSize: new google.maps.Size(32,32),
+                        //anchor: new google.maps.Point(16, 16)
+                    };
+                    var station = new google.maps.Marker({
+                        position: new google.maps.LatLng(markers[i][0], markers[i][1]),
+                        map: map,
+                        icon: icon
+                    });
+
+
+                    if (i == 10)
+                    {
+                        console.log(station);
+                        //break;
+                    }
+                }
+
+                map.setCenter(pos);
+
+            }, function () {
+                handleNoGeolocation(true);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleNoGeolocation(false);
+        }
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</tal:block>
+</tal:block>
