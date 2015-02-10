@@ -3,14 +3,15 @@
 define('DS', DIRECTORY_SEPARATOR);
 
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/..'));
-define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
-define('TEMPLATES_PATH', realpath(dirname(__FILE__) . '/../application/templates'));
-define('MODULES_PATH', realpath(dirname(__FILE__) . '/../modules'));
-define('SYSTEM_PATH', realpath(dirname(__FILE__) . '/../system'));
-define('VENDOR_PATH', realpath(dirname(__FILE__) . '/../vendor'));
+define('APPLICATION_PATH', ROOT_PATH . '/application');
+define('TEMPLATES_PATH', ROOT_PATH . '/application/templates');
+define('MODULES_PATH', ROOT_PATH . '/modules');
+define('SYSTEM_PATH', ROOT_PATH . '/system');
+define('VENDOR_PATH', ROOT_PATH . '/vendor');
+define('MEDIA_PATH', ROOT_PATH . '/media');
 
 # Config
-require_once APPLICATION_PATH . '/config/config.php';
+require_once APPLICATION_PATH . DS . 'config/config.php';
 
 # Autoloader
 require_once SYSTEM_PATH . DS . 'autoloader.php';
