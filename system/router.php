@@ -7,7 +7,7 @@ class Router
 
     public function __construct($path)
     {
-        $path = trim($path, DS);
+        $path = trim(str_replace(array('.css', '.json'), array('', ''), $path), DS);
 
         switch (true)
         {

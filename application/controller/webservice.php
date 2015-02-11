@@ -20,6 +20,13 @@ class Controller_Webservice extends Controller
             $station['company'] = $companies[$station['company_id']];
         }
 
-        exit(json_encode($stations));
+//        header("Content-Encoding: none");
+
+        $output = json_encode($stations);
+
+        header('Tankuje-Len: ' . strlen($output));
+        header('Content-type: application/json');
+
+        exit($output);
     }
 }

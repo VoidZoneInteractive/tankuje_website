@@ -13,8 +13,9 @@ class Controller_Assets extends Controller
 
             $svgData = $this->template->execute();
             $im = new Imagick();
+            $im->setBackgroundColor(new ImagickPixel('transparent'));
             $im->readImageBlob($svgData);
-            $im->setImageFormat('png24');
+            $im->setImageFormat('png32');
             $im->resizeImage(200, 200, imagick::FILTER_LANCZOS, 1);
             $im->writeImage($pngFilename);
 

@@ -19,6 +19,7 @@ class Controller
 
         $this->{'action_' . $this->action}();
 
+
         switch($this->output_mode)
         {
             case PHPTAL::XML:
@@ -31,7 +32,15 @@ class Controller
 
         $this->template->setTemplateRepository(TEMPLATES_PATH);
 
-        exit($this->template->execute());
+//        ob_start();
+
+        $output = $this->template->execute();
+
+        header('Tankuje-Len: ' . strlen($output));
+
+        echo ($output);
+        exit();
+//        ob_end_flush();  // The main one
     }
 
     public function before()
