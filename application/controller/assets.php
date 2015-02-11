@@ -6,6 +6,26 @@ class Controller_Assets extends Controller
     {
         $this->output_mode = PHPTAL::XML;
 
+        $this->template->price = array(
+            '#4B5E24',
+            '#F39200',
+            '#990000',
+            'low' => '#4B5E24',
+            'medium' => '#F39200',
+            'high' => '#990000',
+        );
+
+        $this->template->newness = array(
+            '#E30513',
+            '#FCEA0F',
+            '#8CAA2B',
+            '#CCCCCC',
+            'low' => '#E30513',
+            'medium' => '#FCEA0F',
+            'high' => '#8CAA2B',
+            'old' => '#CCCCCC',
+        );
+
 
         if (isset($_GET['output']) && $_GET['output'] == 'png')
         {
